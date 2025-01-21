@@ -37,9 +37,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 # work
 
-- 1.00
-- page.tsx
-- patientForm.tsx
-- customFormField.tsx
-- validation.ts
+- appwrite.config.ts
+- patient.actions.ts
+- index.d.ts
+- appwrite.types.ts
 -
