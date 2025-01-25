@@ -1,6 +1,7 @@
 import { E164Number } from "libphonenumber-js/core";
 import Image from "next/image";
 import { Control } from "react-hook-form";
+import ReactDatePicker from "react-datepicker";
 import PhoneInput from "react-phone-number-input";
 import {
   FormControl,
@@ -11,6 +12,13 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "./ui/checkbox";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -83,6 +91,61 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             className="input-phone"></PhoneInput>
         </FormControl>
       );
+    case FormFieldType.CHECKBOX:
+      return (
+        <FormControl>
+          <div className="flex items-center gap-4">
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
+            <label htmlFor={props.name} className="checkbox-label">
+              {props.label}
+            </label>
+          </div>
+        </FormControl>
+      );
+    case FormFieldType.DATE_PICKER:
+      return (
+        <div>
+          <Image
+            src="/assets/icons/calendar.svg"
+            height={24}
+            width={24}
+            alt="calendar"
+            className="ml-2"
+          />
+          <FormControl>
+            <ReactDatePicker
+              showTimeSelect={props.showTimeSelect ?? false}
+              selected={field.value}
+              onChange={(date: Date) => field.onChange(date)}
+              timeInputLabel="Time:"
+              dateFormat={props.dateFormat ?? "dd/MM/yyyy"}
+              wrapperClassName="date-picker"></ReactDatePicker>
+          </FormControl>
+        </div>
+      );
+    case FormFieldType.SELECT:
+      return (
+        <FormControl>
+          <Select onValueChange={field.onChange} defaultValue="{field.value}">
+            <FormControl>
+              <SelectTrigger className="shad-select-trigger">
+                <SelectValue placeholder={props.placeholder}></SelectValue>
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent className="shad-select-content">
+              {props.children}
+            </SelectContent>
+          </Select>
+        </FormControl>
+      );
+    case FormFieldType.SKELETON:
+      return props.renderSkeleton ? props.renderSkeleton(field) : null;
+    default:
+      return null;
   }
 };
 

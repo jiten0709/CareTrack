@@ -1,5 +1,3 @@
-import { decl } from "postcss"
-
 declare type SearchParamProps = {
     params: { [key: string]: string }
     searchParams: { [key: string]: string | string[] | indefined }

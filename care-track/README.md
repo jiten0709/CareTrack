@@ -37,8 +37,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 # work
 
-- appwrite.config.ts
-- patient.actions.ts
-- index.d.ts
-- appwrite.types.ts
--
+2.21
+
+page.tsx
+RegisterForm.tsx
+patient.actions.ts
+CustomFormField.tsx
+constants/index.ts
+FileUploader.tsx
