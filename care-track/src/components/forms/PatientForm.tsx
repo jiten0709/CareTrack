@@ -14,23 +14,12 @@ import "react-phone-number-input/style.css";
 import CustomFormField, { FormFieldType } from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(3, "Name must be at least 3 characters")
-    .max(50, "Name must be at most 50 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z
-    .string()
-    .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
-});
-
 export const PatientForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
       name: "",
       email: "",
@@ -42,13 +31,14 @@ export const PatientForm = () => {
     setIsLoading(true);
 
     try {
-      const userData = {
+      const user = {
         name: values.name,
         email: values.email,
         phone: values.phone,
       };
 
-      const newUser = await createUser(userData);
+      const newUser = await createUser(user);
+
       if (newUser) {
         router.push(`/patients/${newUser.$id}/register`);
       }

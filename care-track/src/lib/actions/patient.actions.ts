@@ -34,7 +34,7 @@ export const createUser = async (user: CreateUserParams) => {
 
             return existingUser.users[0]
         }
-        console.error("An error occurred while creating a new user:", error)
+        console.error("An error occurred while creating a new user :: patient.actions.ts :: ", error)
     }
 }
 
@@ -45,7 +45,7 @@ export const getUser = async (userId: string) => {
 
         return parseStringify(user)
     } catch (error) {
-        console.error("An error occurred while retrieving the user details:", error)
+        console.error("An error occurred while retrieving the user details  :: patient.actions.ts ::", error)
     }
 }
 
@@ -74,15 +74,15 @@ export const registerPatient = async ({
             PATIENT_COLLECTION_ID!,
             ID.unique(),
             {
-                identificationDocumentId: file ? file.$id : null,
-                identificationDocumentUrl: file?.$id ? `${ENDPOINT}/stotage/buckets/${BUCKET_ID}/files/${file.$id}/view??project=${PROJECT_ID}` : null,
+                identificationDocumentId: file?.$id ? file.$id : null,
+                identificationDocumentUrl: file?.$id ? `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file.$id}/view??project=${PROJECT_ID}` : null,
                 ...patient,
             }
         )
 
         return parseStringify(newPatient)
     } catch (error) {
-        console.error("An error occurred while registering a new patient:", error)
+        console.error("An error occurred while registering a new patient :: patient.actions.ts ::", error)
     }
 }
 
@@ -97,6 +97,6 @@ export const getPatient = async (userId: string) => {
 
         return parseStringify(patient.documents[0])
     } catch (error) {
-        console.error("An error occurred while retrieving the patient details:", error)
+        console.error("An error occurred while retrieving the patient details :: patient.actions.ts ::", error)
     }
 }
