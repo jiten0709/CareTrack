@@ -17,6 +17,7 @@ import { parseStringify } from "../utils";
 // create appwrite user
 export const createUser = async (user: CreateUserParams) => {
     try {
+        console.log("user :: patient.actions.ts :: ", user)
         const newUser = await users.create(
             ID.unique(),
             user.email,

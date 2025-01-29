@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -82,6 +82,8 @@ const RegisterForm = ({ user }: { user: User }) => {
         privacyConsent: values.privacyConsent,
       };
 
+      console.log("patient :: RegisterForm", patient);
+
       const newpatient = await registerPatient(patient);
 
       if (newpatient) {
@@ -89,7 +91,7 @@ const RegisterForm = ({ user }: { user: User }) => {
       }
     } catch (error) {
       console.error(
-        "An error occurred while registering a new patient:",
+        "An error occurred while registering a new patient :: RegisterForm",
         error
       );
     }
