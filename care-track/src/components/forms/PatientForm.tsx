@@ -31,7 +31,6 @@ export const PatientForm = () => {
     setIsLoading(true);
 
     try {
-      console.log("values :: PatientForm", values);
       const user = {
         name: values.name,
         email: values.email,
@@ -39,9 +38,7 @@ export const PatientForm = () => {
       };
 
       const newUser = await createUser(user);
-      console.log("newUser :: PatientForm", newUser);
       if (newUser) {
-        console.log("new user :: PatientForm", newUser);
         router.push(`/patients/${newUser.$id}/register`);
       }
     } catch (error) {
