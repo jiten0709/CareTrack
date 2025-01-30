@@ -44,3 +44,14 @@ export const updateAppointment = async ({
         console.error("An error occurred while updating the appointment :: appointment.actions: ", error)
     }
 }
+
+// get appointment
+export const getAppointment = async (appointmentId: string) => {
+    try {
+        const appointment = await databases.getDocument(DATABASE_ID!, APPOINTMENTS_COLLECTION_ID!, appointmentId)
+
+        return parseStringify(appointment)
+    } catch (error) {
+        console.error("An error occurred while retrieving the appointment details :: appointment.actions: ", error)
+    }
+}
