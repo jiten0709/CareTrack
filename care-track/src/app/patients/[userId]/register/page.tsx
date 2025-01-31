@@ -5,7 +5,7 @@ import RegisterForm from "@/components/forms/RegisterForm";
 import { getPatient, getUser } from "@/lib/actions/patient.actions";
 
 const Register = async ({ params }: SearchParamProps) => {
-  const { userId } = params;
+  const { userId } = await params;
   const user = await getUser(userId);
   // const patient = await getPatient(userId);
 

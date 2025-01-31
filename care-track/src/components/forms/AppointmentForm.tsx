@@ -17,6 +17,7 @@ import { Doctors } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
 import SubmitButton from "../SubmitButton";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const AppointmentForm = ({
   userId,
@@ -54,7 +55,7 @@ export const AppointmentForm = ({
 
     let status;
     switch (type) {
-      case "create":
+      case "schedule":
         status = "scheduled";
         break;
       case "cancel":
@@ -153,7 +154,7 @@ export const AppointmentForm = ({
                       src={doctor.image}
                       width={32}
                       height={32}
-                      alt={doctor.name}
+                      alt="doctor"
                       className="rounded-full border border-dark-500"
                     />
                     <p>{doctor.name}</p>
@@ -168,7 +169,7 @@ export const AppointmentForm = ({
               name="schedule"
               label="Expected appointment date"
               showTimeSelect
-              dateFormat="dd/MM/yyyy  -  h:mm aa"
+              dateFormat="dd/MM/yyyy - h:mm aa"
             />
 
             <div
@@ -181,12 +182,14 @@ export const AppointmentForm = ({
                 name="reason"
                 placeholder="Annual montly check-up"
                 disabled={type === "schedule"}
+                label="Appointment reason"
               />
 
               <CustomFormField
                 fieldType={FormFieldType.TEXTAREA}
                 control={form.control}
                 name="note"
+                label="Comments/Notes"
                 placeholder="Preferred afternoon appointments, if possible"
                 disabled={type === "schedule"}
               />
