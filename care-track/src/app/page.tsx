@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
 import { PatientForm } from "@/components/forms/PatientForm";
+import exp from "node:constants";
 
-export default function Home() {
+const Home = async ({ searchParams }: SearchParamProps) => {
+  const { admin } = await searchParams;
+  const isAdmin = admin === "true";
+
   return (
     <div className="flex h-screen max-h-screen">
+      {isAdmin && <PasskeyModal />}
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image
@@ -14,8 +17,11 @@ export default function Home() {
             height={1000}
             width={1000}
             alt="patient"
-            className="mb-2 h-30 w-fit"></Image>
+            className="mb-2 h-30 w-fit"
+          />
+
           <PatientForm />
+
           <div className="text-14-regular mt-20 flex justify-between">
             <p className="justify-items-end text-dark-600 xl:text-left">
               © 2025 CareTrack
@@ -35,4 +41,6 @@ export default function Home() {
       />
     </div>
   );
-}
+};
+
+export default Home;
