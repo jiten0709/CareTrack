@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PatientForm } from "@/components/forms/PatientForm";
-import exp from "node:constants";
+import { PasskeyModal } from "@/components/PasskeyModal";
 
 const Home = async ({ searchParams }: SearchParamProps) => {
   const { admin } = await searchParams;
