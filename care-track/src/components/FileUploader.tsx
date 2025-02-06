@@ -31,7 +31,7 @@ export const FileUploader = ({ files, onChange }: FileUploaderProps) => {
       ) : (
         <>
           <Image
-            src="/assests/icons/upload.svg"
+            src="/assets/icons/upload.svg"
             width={40}
             height={40}
             alt="upload"

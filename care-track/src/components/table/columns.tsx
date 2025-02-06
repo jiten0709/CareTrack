@@ -10,7 +10,7 @@ import { AppointmentModal } from "@/components/table/AppointmentModal";
 
 export const columns: ColumnDef<Appointment>[] = [
   {
-    header: "#",
+    header: "Sr. No",
     cell: ({ row }) => {
       return <p className="text-14-medium ">{row.index + 1}</p>;
     },
@@ -52,11 +52,10 @@ export const columns: ColumnDef<Appointment>[] = [
     header: "Doctor",
     cell: ({ row }) => {
       const appointment = row.original;
-      const doctor = Doctors.find((doctor) => {
-        doctor.name === appointment.primaryPhysician;
-      });
-      console.log(doctor);
-      console.log(appointment);
+      const doctor = Doctors.find(
+        (doctor) => doctor.name === appointment.primaryPhysician
+      );
+
       return (
         <div className="flex items-center gap-3">
           <Image
@@ -73,7 +72,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     id: "actions",
-    header: "Actions",
+    header: () => <div className="pl-4">Actions</div>,
     cell: ({ row }) => {
       const appointment = row.original;
 

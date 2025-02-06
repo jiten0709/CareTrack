@@ -23,7 +23,7 @@ const AdminPage = async () => {
         <p className="text-16-semibold">Admin Dashboard</p>
       </header>
 
-      <main>
+      <main className="admin-main">
         <section className="w-full space-y-4">
           <h1 className="header">Welcome 👋</h1>
           <p className="text-dark-700">
@@ -31,7 +31,7 @@ const AdminPage = async () => {
           </p>
         </section>
 
-        <section>
+        <section className="admin-stat">
           <StatCard
             type="scheduled"
             count={appointments.scheduledCount}
