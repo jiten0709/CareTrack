@@ -1,15 +1,6 @@
-# CareTrack (in-progress)
+# CareTrack
 
 CareTrack is a healthcare patient management application that allows patients to easily register, book, and manage their appointments with doctors. It features administrative tools for scheduling, confirming, and canceling appointments, along with SMS notifications, all built using Next.js.
-
-## Tech Stack
-
-- Next.js
-- Appwrite
-- TypeScript
-- TailwindCSS
-- ShadCN
-- Twilio
 
 ## Features
 
@@ -21,7 +12,15 @@ CareTrack is a healthcare patient management application that allows patients to
 - **Send SMS on Appointment Confirmation**: Patients receive SMS notifications to confirm their appointment details.
 - **Complete Responsiveness**: The application works seamlessly on all device types and screen sizes.
 - **File Upload Using Appwrite Storage**: Users can upload and store files securely within the app using Appwrite storage services.
-- **Manage and Track Application Performance Using Sentry**: The application uses Sentry to monitor and track its performance and detect any errors.
+
+## Tech Stack
+
+- Next.js
+- Appwrite
+- TypeScript
+- TailwindCSS
+- ShadCN
+- Twilio
 
 ## Getting Started
 
@@ -36,7 +35,7 @@ CareTrack is a healthcare patient management application that allows patients to
 
    ```sh
    git clone https://github.com/jiten0709/CareTrack.git
-   cd care-track
+   cd CareTrack
    ```
 
 2. Install dependencies:
@@ -46,7 +45,21 @@ CareTrack is a healthcare patient management application that allows patients to
    ```
 
 3. Set up environment variables:
-   Create a `.env` file in the root of your project and refer .env.sample file.
+   Create a `.env` file in the root of your project and add the necessary environment variables. For example:
+
+   ```env
+   Appwrite environment variables
+
+   APPWRITE_PROJECT_ID=xxx
+   APPWRITE_API_KEY=xxx
+   APPWRITE_DB_ID=xxx
+   PATIENT_COLLECTION_ID=xxx
+   APPOINTMENTS_COLLECTION_ID=xxx
+   DOCTORS_COLLECTION_ID=xxx
+   NEXT_PUBLIC_BUCKET_ID=xxx
+   NEXT_PUBLIC_ENDPOINT=https://cloud.appwrite.io/v1
+   NEXT_PUBLIC_ADMIN_PASSKEY=123456
+   ```
 
 ### Running the Project
 
