@@ -4,10 +4,14 @@ import {
     APPOINTMENTS_COLLECTION_ID,
     DATABASE_ID,
     databases,
+    messaging,
 } from "@/lib/appwrite.config"
 import { ID, Query } from "node-appwrite"
 import { parseStringify } from "@/lib/utils"
 import { Appointment } from "@/types/appwrite.types"
+import { formatDateTime } from "@/lib/utils"
+import { error } from "console"
+import { revalidatePath } from "next/cache"
 
 // create appointment
 export const createAppointment = async (appointment: CreateAppointmentParams) => {
@@ -28,17 +32,26 @@ export const createAppointment = async (appointment: CreateAppointmentParams) =>
 // update appointment
 export const updateAppointment = async ({
     appointmentId,
+    userId,
     appointment,
+    type,
 }: UpdateAppointmentParams) => {
     try {
         const updatedAppointment = await databases.updateDocument(
             DATABASE_ID!,
             APPOINTMENTS_COLLECTION_ID!,
             appointmentId,
-            appointment
+            appointment,
         )
 
         if (!updatedAppointment) throw new Error("Failed to update the appointment :: appointment.actions")
+
+        const message = `Greetings from CareTrack! ${type === "schedule" ? `Your appointment is scheduled on ${formatDateTime(appointment.schedule!).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform you that your appointment for ${formatDateTime(appointment.schedule!).dateTime} is cancelled. Reason: ${appointment.cancellationReason}`}`
+        const messageSent = await sendSMSNotification(userId, message)
+
+        if (!messageSent) throw new Error("Failed to send the SMS notification :: appointment.actions")
+
+        revalidatePath("/admin")
 
         return parseStringify(updatedAppointment)
     } catch (error) {
@@ -98,5 +111,21 @@ export const getAppointmentCount = async () => {
         return parseStringify(data)
     } catch (error) {
         console.error("An error occurred while retrieving the appointment count :: appointment.actions: ", error)
+    }
+}
+
+// send sms notification
+export const sendSMSNotification = async (userId: string, content: string) => {
+    try {
+        const message = await messaging.createSms(
+            ID.unique(),
+            content,
+            [],
+            [userId]
+        )
+
+        return parseStringify(message)
+    } catch (error) {
+        console.error("An error occurred while sending the SMS notification :: appointment.actions: ", error)
     }
 }

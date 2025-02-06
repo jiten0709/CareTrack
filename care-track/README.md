@@ -37,13 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 # work
 
-3.50
-
-admin/page.tsx
-StatCard.tsx
 appointment.actions.ts
-table/DataTable.tsx
-table/columns.tsx
-StatusBadge.tsx
-AppointmentModal.tsx
-AppointmentForm.tsx

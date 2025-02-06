@@ -55,7 +55,7 @@ export const PasskeyModal = () => {
       localStorage.setItem("accessKey", encryptedKey);
       setOpen(false);
     } else {
-      setError("Invalid passkey. Please try again. :: PasskeyModal.tsx");
+      setError("Invalid passkey. Please try again.");
     }
   };
 
